@@ -6,3 +6,7 @@ main:
 	bash getlatest.sh
 	chmod +x daemon tsdns
 	snapcraft
+try:
+	rm -rf build
+	make
+	sudo snap install ./build/*.snap --devmode
