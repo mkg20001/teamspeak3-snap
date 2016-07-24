@@ -13,16 +13,18 @@ fi
 
 export HOME=$data
 
-export KDEDIRS=
-export KDEDIR=
-export QTDIR=.
-export QT_PLUGIN_PATH=.
-export LD_LIBRARY_PATH="$dir:.:$LD_LIBRARY_PATH"
+#export KDEDIRS=
+#export KDEDIR=
+#export QTDIR=.
+#export QT_PLUGIN_PATH=.
+#export LD_LIBRARY_PATH="$dir:.:$LD_LIBRARY_PATH"
 
-cd $dir
+#cd $dir
 
-if [ -e $dir/ts3client_linux_x86 ]; then
-	$dir/ts3client_linux_x86 $@
-else
-	$dir/ts3client_linux_amd64 $@
-fi
+#if [ -e $dir/ts3client_linux_x86 ]; then
+#	$dir/ts3client_linux_x86 $@
+#else
+#	$dir/ts3client_linux_amd64 $@
+#fi
+
+bash $SNAP/bin/desktop-launch $dir/ts3client_runscript.sh
