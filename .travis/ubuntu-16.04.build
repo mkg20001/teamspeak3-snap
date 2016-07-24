@@ -1,5 +1,7 @@
-service snapd start
-service xvfb start
+sh -e /etc/init.d/xvfb start
+sh -e /etc/init.d/snapd start
 cd /home
-whoami
 make try
+teamspeak3-server
+teamspeak3-server.tsdns
+teamspeak3
