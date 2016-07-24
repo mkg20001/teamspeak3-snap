@@ -1,4 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update
-RUN apt-get install -y snapcraft make tree
+RUN apt-get install -y snapcraft make tree xvfb coreutils
+RUN echo "%all ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo "ubuntu ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN addgroup all
