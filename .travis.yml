@@ -16,7 +16,7 @@ services:
 
 before_install:
   - sudo docker pull ${distribution}:${version}
-  - sudo docker build --rm=true --file=ci/${distribution}-${version}.docker --tag=${distribution}-${version}:jucipp ci
+  - sudo docker build --rm=true --file=ci/${distribution}-${version}.docker --tag=${distribution}-${version}:mkg20001 .travis
 
 script:
   - container_id=$(mktemp)
