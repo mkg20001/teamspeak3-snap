@@ -1,0 +1,72 @@
+#!/bin/sh
+
+dir=$SNAP/bin/server/tsdns
+data=$SNAP_USER_DATA/tsdns
+mkdir -p $data/logs
+pidfile=$data/tsdns.pid
+
+config="tsdns_settings.ini"
+
+if ! [ -f $data/$config ]; then
+  echo "No config file found, creating example config"
+  cp $dir/$config.sample $data/$config
+  exit 2
+fi
+
+doscript() {
+  if ! [ -f $pidfile ]; then
+    touch $pidfile
+  fi
+  pid=`cat $pidfile`
+  case "$1" in
+    start)
+      echo -n "Starting TSDNS"
+      if kill -s 0 $pid > /dev/null 2> /dev/null; then
+        echo " already running"
+      else
+        cd $data
+        log=$data/logs/tsdns_$(date +%d.%m.%y_%H:%M:%S_%s).log
+        $dir/tsdnsserver 2>&1 > $log &
+        pid=$!
+        echo "$pid" > $pidfile
+        sleep 2s
+        if kill -s 0 $pid > /dev/null 2> /dev/null; then
+          echo " ok"
+        else
+          echo " failed"
+          rm $pidfile
+        fi
+      fi
+      ;;
+    stop)
+      echo -n "Stopping TSDNS"
+      cd $data
+      if kill -s 0 $pid > /dev/null 2> /dev/null; then
+        kill $pid
+        if kill -s 0 $pid > /dev/null 2> /dev/null; then
+          echo " failed"
+        else
+          echo " ok"
+          rm $pidfile
+        fi
+      else
+        echo " not running"
+        rm $pidfile
+      fi
+      sleep 2s
+      ;;
+    restart)
+      doscript stop
+      doscript start
+      ;;
+    reset)
+      echo "Reseted!"
+      cp $dir/$config.sample $data/$config
+      ;;
+    *)
+      echo "Usage: $0 {start|stop|restart|reset}"
+      ;;
+  esac
+}
+
+doscript $1
