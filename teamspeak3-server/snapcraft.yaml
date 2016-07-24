@@ -2,7 +2,7 @@ name: teamspeak3-server
 version: 0.0.1
 summary: Teamspeak3 Server
 description: Teamspeak3 Server and TSDNS
-confinement: strict
+confinement: devmode
 
 apps:
   teamspeak3-server:
