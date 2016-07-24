@@ -18,4 +18,5 @@ parts:
         - desktop/qt5
     files:
       client: bin/teamspeak
+      ts3client: bin/client
       license.sh: lib/license

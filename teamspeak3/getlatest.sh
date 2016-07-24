@@ -56,7 +56,7 @@ for m in $mir1 $mir2; do
     sed -i "s/read FOO//g" $out
     bash ./$out
     exitonerr "Cannot uncompress $out" $?
-    outdir=`cat out | grep "^targetdir="`
+    outdir=`cat $out | head -n 500 | grep "^targetdir=" | grep '"[a-zA-Z0-9_-]*"' -o | grep "[a-zA-Z0-9_-]*" -o`
     mv $outdir ts3client
     exitonerr "Cannot rename file" $?
     v=`echo $m | grep "/[0-9.][0-9.]*/" -o | grep "[0-9.]*" -o`
