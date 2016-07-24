@@ -1,5 +1,10 @@
-sh -e /etc/init.d/xvfb start
-sh -e /etc/init.d/snapd start
+#!/bin/sh
+
+service xvfb start
+service snapd start
+#sh -e /etc/init.d/xvfb start
+#sh -e /etc/init.d/snapd start
+
 cd /home
 make try
 teamspeak3-server
