@@ -1,2 +1,2 @@
-sudo apt install snapcraft
+sudo apt install snapcraft make
 make try
