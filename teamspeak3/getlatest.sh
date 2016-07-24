@@ -61,6 +61,7 @@ for m in $mir1 $mir2; do
     exitonerr "Cannot rename file" $?
     v=`echo $m | grep "/[0-9.][0-9.]*/" -o | grep "[0-9.]*" -o`
     echo "$v" > ts3client/VERSION
+    chmod 777 ts3client/ts3client*
     echo "[OK]"
     exit 0
   else

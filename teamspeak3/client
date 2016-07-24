@@ -10,3 +10,19 @@ if ! [ -f $license ]; then
   askforlicense
   touch $license
 fi
+
+export HOME=$data
+
+export KDEDIRS=
+export KDEDIR=
+export QTDIR=.
+export QT_PLUGIN_PATH=.
+export LD_LIBRARY_PATH="$dir:.:$LD_LIBRARY_PATH"
+
+cd $dir
+
+if [ -e $dir/ts3client_linux_x86 ]; then
+	$dir/ts3client_linux_x86 $@
+else
+	$dir/ts3client_linux_amd64 $@
+fi
