@@ -1,0 +1,27 @@
+sudo: required
+dist: trusty
+
+env:
+  - distribution: ubuntu
+    version: 16.04
+    init: /sbin/init
+    run_opts: ""
+#  - distribution: debian
+#    version: 8
+#    init: /sbin/init
+#    run_opts: ""
+
+services:
+  - docker
+
+before_install:
+  - sudo docker pull ${distribution}:${version}
+  - sudo docker build --rm=true --file=ci/${distribution}-${version}.docker --tag=${distribution}-${version}:jucipp ci
+
+script:
+  - container_id=$(mktemp)
+  - sudo docker run --detach --volume="${PWD}":/home/:rw ${run_opts} ${distribution}-${version}:jucipp "${init}" > "${container_id}"
+
+  - sudo docker exec "$(cat ${container_id})" bash /home/.travis/${distribution}-${version}.build
+
+  - sudo docker stop "$(cat ${container_id})"
