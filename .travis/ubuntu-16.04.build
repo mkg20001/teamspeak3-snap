@@ -1,9 +1,9 @@
 #!/bin/sh
 
-service xvfb start
-service snapd start
-#sh -e /etc/init.d/xvfb start
-#sh -e /etc/init.d/snapd start
+for s in snap.webdm.snappyd; do
+  service $s start
+done
+dir /etc/init.d
 
 cd /home
 make try
