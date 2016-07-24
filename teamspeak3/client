@@ -1,0 +1,12 @@
+#!/bin/sh
+
+dir=$SNAP/bin/client
+data=$SNAP_USER_DATA/client
+mkdir -p $data
+license=$data/LICENSE.ok
+
+if ! [ -f $license ]; then
+  eval "$(cat $SNAP/lib/license)"
+  askforlicense
+  touch $license
+fi

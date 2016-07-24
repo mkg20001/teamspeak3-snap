@@ -1,0 +1,21 @@
+name: teamspeak3
+version: 0.0.1
+summary: Teamspeak3 Client
+description: Teamspeak3 Client
+confinement: strict
+
+apps:
+  teamspeak3:
+    command: bash $SNAP/bin/teamspeak
+    plugs:
+      - network
+      - unity7
+      - opengl
+parts:
+  glue:
+    plugin: copy
+    after:
+        - desktop/qt5
+    files:
+      client: bin/teamspeak
+      license.sh: lib/license
