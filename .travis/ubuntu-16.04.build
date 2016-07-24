@@ -1,4 +1,3 @@
-sudo apt install snapcraft make tree
 dir
 tree
 make try
