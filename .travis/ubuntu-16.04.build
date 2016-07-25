@@ -1,12 +1,3 @@
 #!/bin/sh
-
-for s in snap.webdm.snappyd; do
-  service $s start
-done
-dir /etc/init.d
-
 cd /home
-make try
-teamspeak3-server
-teamspeak3-server.tsdns
-teamspeak3
+make
