@@ -1,5 +1,6 @@
 # teamspeak3-snap
 Teamspeak 3 Client & Server Snap Package
+**Project Status: Rewrite**
 
 # Bugs / WIP
 This Snap currently does **not** work.

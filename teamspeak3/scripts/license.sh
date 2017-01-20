@@ -93,7 +93,6 @@ Contact us at the above email address to obtain information about the data store
 
 askforlicense()
 {
-#  if test x"$licensetxt" != x; then
     echo "Welcome to the TeamSpeak 3 Client for Linux on amd64 client
 
 In order to use this software you are required to accept the license
@@ -105,15 +104,16 @@ You can scroll with the arrow keys and quit the viewer by pressing 'q'.
     echo "$licensetxt" | less
     while true
     do
-      echo "Please type y to accept, n otherwise: "
-      read yn
-      if test x"$yn" = xn; then
-        keep=n
- 	eval $finish; exit 1
-        break;
-      elif test x"$yn" = xy; then
-        break;
-      fi
+      read -p "Please type y to accept, n otherwise: " yn
+      echo "got $yn x$yn"
+      case "x$yn" in
+        xn*)
+          echo "You may not use this software."
+          exit 1
+          ;;
+        xy*)
+          return 0
+          ;;
+      esac
     done
-#  fi
 }

@@ -1,12 +1,12 @@
 #!/bin/sh
 
-dir=$SNAP/bin/client
+dir=$SNAP/ts3
 data=$SNAP_USER_DATA/client
 mkdir -p $data
-license=$data/LICENSE.ok
+license=$data/.license_seen
 
 if ! [ -f $license ]; then
-  eval "$(cat $SNAP/lib/license)"
+  . $SNAP/lib/license
   askforlicense
   touch $license
 fi
@@ -27,4 +27,16 @@ export HOME=$data
 #	$dir/ts3client_linux_amd64 $@
 #fi
 
-bash $SNAP/bin/desktop-launch $dir/ts3client_runscript.sh
+cd $dir
+
+export KDEDIRS=
+export KDEDIR=
+export QTDIR=.
+export QT_PLUGIN_PATH=.
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:."
+
+if [ -e ts3client_linux_x86 ]; then
+	bash $SNAP/bin/desktop-launch ./ts3client_linux_x86 $@
+else
+	bash $SNAP/bin/desktop-launch ./ts3client_linux_amd64 $@
+fi

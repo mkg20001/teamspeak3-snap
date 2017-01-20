@@ -31,22 +31,6 @@ exitonerr() {
   fi
 }
 
-# workarround for a snapcraft bug
-pkgget() {
-  echo "[download] $1"
-  apt-get download $1 > /dev/null
-  f=`dir -w 1 | grep "^$1"`
-  echo "[unpack  ] $f"
-  dpkg-deb -R $f sq
-}
-mkdir sq
-mkdir bin
-pkgget sqlite3
-pkgget coreutils
-cp sq/usr/bin/* ./bin
-rm -rf sq
-# [/]
-
 for m in $mir1 $mir2; do
   wget $m -O $out
   if [ $? == "0" ]; then
@@ -70,5 +54,5 @@ for m in $mir1 $mir2; do
 done
 
 #still here? - download failed
-echo "[ERR] download failed!!!"
+echo "[ERR] Download failed!"
 exit 2

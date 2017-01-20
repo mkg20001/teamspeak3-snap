@@ -2,6 +2,7 @@ name: teamspeak3
 version: 0.0.1
 summary: Teamspeak3 Client
 description: Teamspeak3 Client
+grade: stable
 confinement: devmode
 
 apps:
@@ -12,12 +13,25 @@ apps:
       - unity7
       - opengl
       - x11
+#parts:
+#  glue:
+#    plugin: copy
+#    after:
+#        - desktop/qt5
+#    files:
+#      client: bin/teamspeak
+#      ts3client: bin/client
+#      license.sh: lib/license
 parts:
-  glue:
-    plugin: copy
+  teamspeak3:
     after:
-        - desktop/qt5
-    files:
-      client: bin/teamspeak
-      ts3client: bin/client
-      license.sh: lib/license
+      - desktop/qt5
+      - preload
+    plugin: make
+    source: client
+    stage-packages:
+      - sqlite3
+      - openssl
+  scripts:
+    plugin: make
+    source: scripts
