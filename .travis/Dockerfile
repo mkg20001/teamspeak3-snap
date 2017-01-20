@@ -1,7 +1,7 @@
 FROM ubuntu:16.10
 
 RUN apt-get update
-RUN apt-get install apt-utils
+RUN apt-get install apt-utils -y
 RUN apt-get dist-upgrade -y
 RUN apt-get install language-pack-en -y
 RUN locale -a
