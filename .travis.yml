@@ -15,9 +15,8 @@ services:
   - docker
 
 before_install:
-  - sudo docker pull ${distribution}:${version}
-  - sudo docker build --rm=true --file=.travis/Dockerfile --tag=ci-test
+  - sudo docker build --rm=true --file=.travis/Dockerfile --tag=ci-test .travis
 
 script:
   - container_id=$(mktemp)
-  - sudo docker run --volume="${PWD}":/home/:rw ${run_opts} ci-test bash /home/.travis/build
+  - sudo docker run --volume="${PWD}":/home/:rw ci-test bash /home/.travis/build
